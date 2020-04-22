@@ -1,4 +1,4 @@
-
+import scipy.stats as stats
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -9,24 +9,57 @@ df = pd.read_csv("irisdata.csv")
 '''plt.hist(df["sepal_width"]) wouldnt read sepal width from csv because space between the , and "sepal_width" in file
 plt.show()'''
 
+#Pandas describe function for descriptive statistics
+print("Sepal Length")
+print(df["sepal_length"].groupby(df["variety"]).describe())
+print("Sepal Width")
+print(df["sepal_width"].groupby(df["variety"]).describe())
+print("Petal Length")
+print(df["petal_length"].groupby(df["variety"]).describe())
+print("Petal Width")
+print(df["petal_width"].groupby(df["variety"]).describe())
+
+#Levene's test for homogeneity of variance
+print(stats.levene(setosa['sepal_width'], versicolor['sepal_width'], virginica['sepal_width']))
+
+print(stats.levene(setosa['sepal_length'], versicolor['sepal_length'], virginica['sepal_length']))
+
+print(stats.levene(setosa['petal_width'], versicolor['petal_width'], virginica['petal_width']))
 
 
-#with open("descriptive_stats.txt", "w") as f:
-    #f.write("Sepal Length\n")
-    #sepl= (df["sepal_length"].groupby(df["variety"]).describe())
-    #sepl.to_csv("descriptive_stats.txt")
-    
-#with open("descriptive_stats.txt", "a") as f:
-    #f.write("\nSepal Width\n") 
-    #sepw= (df["sepal_width"].groupby(df["variety"]).describe())
-    #sepw.to_csv("descriptive_stats.txt")
-    #f.write("\nPetal Length\n") 
-#pet.l= (df["petal_length"].groupby(df["variety"]).describe())
-#print()
-#print ("Petal Width") 
-#print(df["petal_width"].groupby(df["variety"]).describe())
+print(stats.levene(setosa['petal_length'], versicolor['petal_length'], virginica['petal_length']))
 
-'''plt.hist(df["sepal_length"][0:50])
+
+#calculating differences for use in normality test
+sw_diff1 = setosa['sepal_width'] - versicolor['sepal_width']
+sw_diff2 = setosa['sepal_width'] - virginica['sepal_width']
+sl_diff1 = setosa['sepal_length'] - versicolor['sepal_length']
+sl_diff2 = setosa['sepal_length'] - virginica['sepal_length']
+pw_diff1 = setosa['petal_width'] - versicolor['petal_width']
+pw_diff2 = setosa['petal_width'] - virginica['petal_width']
+pl_diff1 = setosa['petal_length'] - versicolor['petal_length']
+pl_diff2 = setosa['petal_length'] - virginica['petal_length']
+
+#Shapiro test for normality
+print(stats.shapiro(sw_diff1))
+print(stats.shapiro(sw_diff2))
+print(stats.shapiro(sl_diff1))
+print(stats.shapiro(sl_diff2))
+print(stats.shapiro(pw_diff1))
+print(stats.shapiro(pw_diff2))
+print(stats.shapiro(pl_diff1))
+print(stats.shapiro(pl_diff2))
+
+print(stats.f_oneway(setosa['sepal_width'], versicolor['sepal_width'], virginica['sepal_width']))
+
+print(stats.f_oneway(setosa['sepal_length'], versicolor['sepal_length'], virginica['sepal_length']))
+
+print(stats.f_oneway(setosa['petal_width'], versicolor['petal_width'], virginica['petal_width']))
+
+print(stats.f_oneway(setosa['petal_length'], versicolor['petal_length'], virginica['petal_length']))
+
+
+plt.hist(df["sepal_length"][0:50])
 plt.title("Sepal Length - Iris Setosa")
 plt.xlabel("Sepal length(cm)")
 plt.ylabel("No. of flowers")
@@ -108,7 +141,7 @@ plt.title("Petal Widgth - Iris Virginica")
 plt.xlabel("Petal width(cm)")
 plt.ylabel("No. of flowers")
 plt.savefig("Petal Widgth- Iris virginica.png")
-plt.clf()'''
+plt.clf()
 
 
 sns.pairplot(df, hue="variety")
