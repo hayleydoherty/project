@@ -14,6 +14,8 @@ For my investigations I first inported the various libraries needed to analyse a
 	-Matplotlib
 	-Pandas
 	-NumPy
+	-Scipy.stats
+	-statsmodels.stats.multicomp
 	
 I used Pandas to output descriptive statistics of each variable in the data set, grouped by their species.  This allows us to see measures including mean, median, min, max and standard deviation of the data.  
 By using Pandas to read each variable separately and group the variable by 'variety' (species), I was able to get meaningful descriptive stats of each variable and easily compare the stats of the different groups.  Below is an example of the code I used to do this, with a new line for each variable.
@@ -21,6 +23,24 @@ By using Pandas to read each variable separately and group the variable by 'vari
 	df["variable"].groupby(df["variety"]).describe()
 
 We were asked to have the descriptive statistics ouput to a text file when the program is run however I have been unable to figure out how to do this without having the whole program output to a text file (using > in the command prompt when running the analysis.py file).
+
+As part of my investigation I performed some basic analysis of the data using statistical modules available in python.  One such module is the SciPy.stats module.  First, I used statistical functions available in this module to determine if the data should be analysed parametrically or non-parametrically.  This required that the data be tested for homogeneity of variance and normality using the Levene Test and Shapiro Test.  For data to be tested parametrically, it must satisfy two of the following three assumptions, the data is distributed normally, it displays homogeneity of variance and there are equal number of data points in each of the groups to be tested.
+
+Below is an example of the code used to perform the Levene test of homogeneity of variance.  The example below is looking at the sepal width data for all three species of Iris and determining if the spread(variance) od data is simialr between the groups.  As the p-value is not significant (p-value is > 0.05) we can conclude that the groups disply equal variances.
+
+	stats.levene(setosa['sepal_width'], versicolor['sepal_width'], virginica['sepal_width'])
+	LeveneResult(statistic=0.6475222363405327, pvalue=0.5248269975064537)
+
+
+	stats.shapiro(setosa['sepal_width'])
+	(0.968691885471344, 0.20465604960918427)
+
+
+Following my analysis I determined that the Fisher dataset could be analysed parametrically and so went on to perform a one-way ANOVA.  
+
+	stats.f_oneway(setosa['sepal_width'], versicolor['sepal_width'], virginica['sepal_width'])
+	F_onewayResult(statistic=47.36446140299382, pvalue=1.3279165184572242e-16)
+	
 
 Next we were asked to create histograms of each variable and save them as png files.  I used Matplotlib to do this.  For each variable, I wanted to split the data into the 3 species groups as I believe viewing the groups separately will provide more information.  The first line of code below generates a histogram of the data frame of the sepal length variable. I limited the data frame to the first 50 rows as these values are in the Iris setosa species.  By doing this, it outputs a histogram of only the sepal lenghts of the flowers in the setosa group.  Similarly, for the Iris- versicolor group the data frame was limited to the rows [50:100] as they contained the data relevant to this species and the final 50 rows were included in the data frame used to create the histogram for the Iris- virginica species.
 
