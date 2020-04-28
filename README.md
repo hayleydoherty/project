@@ -88,17 +88,17 @@ Each of the three groups (species) are in all the graphs with one of the four va
 ## My Findings
 Based on the results from the descriptive statistics and the tests for normality and homogeneity of variance, I concluded that the data wassuitable to be tested parametrically.  As there are more than two groups using t-tests would be inappropriate so I chose to use one-way ANOVA tests to analyse the data.  The first variable I will discuss is sepal width.  The results of the ANOVA indicated that there was a significant difference between the species in regards to their sepal width as the p-value was less than 0.05.  The Tukey post-hoc test revealed that the sepal width of all three species of iris were different to each other.  
 
-		![Boxplots of Sepal Width](C:\Users\Hayle\Documents\H DIP\Programming\project\Sepal Width.png?raw=true "Sepal Width")
+		![Boxplots of Sepal Width](C:\Users\Hayle\Documents\H DIP\Programming\project\Sepal Width.png "Sepal Width")
 		
 The next variable to look at is sepal length.  The results of the ANOVA indicated that there was a significant difference between the species in regards to their sepal length as the p-value was less than 0.05.  The Tukey post-hoc test revealed that the sepal length of all three species of iris were different to each other.  		
 
-	![Boxplots of Sepal Length](C:\Users\Hayle\Documents\H DIP\Programming\project\Sepal Length.png?raw=true "Sepal Length")
+	![Boxplots of Sepal Length](C:\Users\Hayle\Documents\H DIP\Programming\project\Sepal Length.png "Sepal Length")
 
 As with the results for sepal width and length, the results for petal width and length showed that each group was statistically different from the others.  Tukey's post-hoc tests revealed that the null hypothesis could be rejected for all of the comparisons made, meaning all groups were different to each other.
 
-	![Boxplots of Petal Width](C:\Users\Hayle\Documents\H DIP\Programming\project\Petal Width.png?raw=true "Petal Width")
+	![Boxplots of Petal Width](C:\Users\Hayle\Documents\H DIP\Programming\project\Petal Width.png "Petal Width")
 
-	![Boxplots of Petal Length](C:\Users\Hayle\Documents\H DIP\Programming\project\Petal Length.png?raw=true "Petal Length")
+	![Boxplots of Petal Length](C:\Users\Hayle\Documents\H DIP\Programming\project\Petal Length.png "Petal Length")
 
 
 My findings suggest that it is possible to classify an Iris flower as a member of one of these three species based on the measurements analysed above; sepal width and length and petal width and length.  It also appears that the setosa species is less closely related to the other two species as versicolor and virginica are to each other as the differences in variables measured appears to be bigger between the setosa group and versicolor group and the setosa group and virginica group compared to the differences between the versicolor and virginica groups.
