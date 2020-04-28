@@ -88,7 +88,7 @@ Each of the three groups (species) are in all the graphs with one of the four va
 ## My Findings
 Based on the results from the descriptive statistics and the tests for normality and homogeneity of variance, I concluded that the data wassuitable to be tested parametrically.  As there are more than two groups using t-tests would be inappropriate so I chose to use one-way ANOVA tests to analyse the data.  The first variable I will discuss is sepal width.  The results of the ANOVA indicated that there was a significant difference between the species in regards to their sepal width as the p-value was less than 0.05.  The Tukey post-hoc test revealed that the sepal width of all three species of iris were different to each other.  
 
-		![Boxplots of Sepal Width](project\SepalWidth.png?raw=true "Sepal Width")
+		![Boxplots of Sepal Width](\project\SepalWidth.png?raw=true "Sepal Width")
 		
 The next variable to look at is sepal length.  The results of the ANOVA indicated that there was a significant difference between the species in regards to their sepal length as the p-value was less than 0.05.  The Tukey post-hoc test revealed that the sepal length of all three species of iris were different to each other.  		
 
