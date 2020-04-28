@@ -10,7 +10,7 @@ pd.read_csv("irisdata.csv")
 df = pd.read_csv("irisdata.csv")
 
 '''plt.hist(df["sepal_width"]) wouldnt read sepal width from csv because space between the , and "sepal_width" in file
-plt.show()'''
+plt.show()
 
 #Pandas describe function for descriptive statistics
 print("Sepal Length")
@@ -41,7 +41,7 @@ print('\nPetal Length')
 print(stats.levene(setosa['petal_length'], versicolor['petal_length'], virginica['petal_length']))
 
 
-'''#calculating differences for use in normality test
+#calculating differences for use in normality test
 sw_diff1 = setosa['sepal_width'] - versicolor['sepal_width']
 sw_diff2 = setosa['sepal_width'] - virginica['sepal_width']
 sl_diff1 = setosa['sepal_length'] - versicolor['sepal_length']
@@ -49,7 +49,7 @@ sl_diff2 = setosa['sepal_length'] - virginica['sepal_length']
 pw_diff1 = setosa['petal_width'] - versicolor['petal_width']
 pw_diff2 = setosa['petal_width'] - virginica['petal_width']
 pl_diff1 = setosa['petal_length'] - versicolor['petal_length']
-pl_diff2 = setosa['petal_length'] - virginica['petal_length']'''
+pl_diff2 = setosa['petal_length'] - virginica['petal_length']
 
 #Shapiro test for normality
 print("\nShapiro test of normality")
@@ -111,7 +111,7 @@ print(mc3.tukeyhsd())
 print()
 print("\nPetal Length:")
 mc4 = MultiComparison(df['petal_length'], df['variety'])
-print(mc4.tukeyhsd())
+print(mc4.tukeyhsd())'''
 
 
 
@@ -197,11 +197,22 @@ plt.title("Petal Widgth - Iris Virginica")
 plt.xlabel("Petal width(cm)")
 plt.ylabel("No. of flowers")
 plt.savefig("Petal Widgth- Iris virginica.png")
-plt.clf()
+plt.clf()'''
 
+sns.boxplot(x="variety", y="sepal_width", data = df)
+plt.savefig("Sepal Width.png")
+plt.clf()
+sns.boxplot(x="variety", y="sepal_length", data = df)
+plt.savefig("Sepal Length.png")
+plt.clf()
+sns.boxplot(x="variety", y="petal_width", data = df)
+plt.savefig("Petal Width.png")
+plt.clf()
+sns.boxplot(x="variety", y="petal_length", data = df)
+plt.savefig("Petal Length.png")
 
 sns.pairplot(df, hue="variety")
-plt.savefig("Scatter plot of variable pairs.png") '''
+plt.savefig("Scatter plot of variable pairs.png")
 
 
 
