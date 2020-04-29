@@ -26,7 +26,7 @@ We were asked to have the descriptive statistics ouput to a text file when the p
 
 As part of my investigation I performed some basic analysis of the data using statistical modules available in python.  One such module is the SciPy.stats module.  First, I used statistical functions available in this module to determine if the data should be analysed parametrically or non-parametrically.  This required that the data be tested for homogeneity of variance and normality using the Levene Test and Shapiro Test.  For data to be tested parametrically, it must satisfy two of the following three assumptions, the data is distributed normally, it displays homogeneity of variance and there are equal number of data points in each of the groups to be tested.
 
-Below is an example of the code used to perform the Levene test of homogeneity of variance.  The example below is looking at the sepal width data for all three species of Iris and determining if the spread(variance) od data is simialr between the groups.  As the p-value is not significant (p-value is > 0.05) we can conclude that the groups disply equal variances.
+Below is an example of the code used to perform the Levene test of homogeneity of variance.  The example below is looking at the sepal width data for all three species of Iris and determining if the spread(variance) of data is simialr between the groups.  As the p-value is not significant (p-value is > 0.05) we can conclude that the groups disply equal variances.
 
 	stats.levene(setosa['sepal_width'], versicolor['sepal_width'], virginica['sepal_width'])
 	LeveneResult(statistic=0.6475222363405327, pvalue=0.5248269975064537)
@@ -58,9 +58,9 @@ Below is an example of the results output by the Tukey post-hoc test.  This exam
 		----------------------------------------------------------------------
 
 
-Next we were asked to create histograms of each variable and save them as png files.  I used Matplotlib to do this.  For each variable, I wanted to split the data into the three species groups as I believe viewing the groups separately will provide more information.  The first line of code below generates a histogram of the data frame of the sepal length variable. I limited the data frame to the first 50 rows as these values are in the Iris setosa species.  By doing this, it outputs a histogram of only the sepal lenghts of the flowers in the setosa group.  Similarly, for the Iris- versicolor group the data frame was limited to the rows [50:100] as they contained the data relevant to this species and the final 50 rows were included in the data frame used to create the histogram for the Iris- virginica species.
+Next we were asked to create histograms of each variable and save them as png files.  I used Matplotlib to do this.  For each variable, I generated a spearate graph for each  species.  The line of code below generates a histogram of the sepal length variable of the setosa group.
 
-	plt.hist(df["sepal_length"][0:50])
+	plt.hist(setosa["sepal_length"])
 
 I used Matplotlib to add a title and axis titles to the histograms.
 
@@ -68,7 +68,7 @@ I used Matplotlib to add a title and axis titles to the histograms.
 	plt.xlabel("Sepal length(cm)")
 	plt.ylabel("No. of flowers")
 
-I used the following code to save the histograms as a png file.  This were saved in the same folder as the python script.
+I used the following code to save the histograms as a png file.  They were saved in the same folder as the python script.
 
 	plt.savefig("Sepal Length- Iris setosa.png")
 
@@ -76,8 +76,13 @@ The code below is used to 'clear' the graph after it is saved or else the follow
 
 	plt.clf()
 
+I also made boxplots of the data in order to get a visual representation of the spread of the data in each group.  I used seaborn to generate these graphs.  Seaborn is another data visualization library used with python.  "Variety" on the x-axis refers to the species group.  The variable is measured on the y-axis.  Each boxplot is saved as a .png file and the graph is 'cleared' before the next boxplot is generated to prevent them being imposed on top of each other.
 
-Lastly we were asked to output a scatter plot of each pair of variables. To do this I used Seaborn which is a data visualization library used with python.  The code below was used to create a 4 x 4 grid of all possible variable pairs.  
+	sns.boxplot(x="variety", y="sepal_width", data = df)
+	plt.savefig("SepalWidth.png")
+	plt.clf()
+
+Lastly we were asked to output a scatter plot of each pair of variables.  The code below was used to create a 4 x 4 grid of all possible variable pairs.  
 	
 	sns.pairplot(df, hue="variety")
 	plt.savefig("Scatter plot of variable pairs.png")
@@ -88,17 +93,17 @@ Each of the three groups (species) are in all the graphs with one of the four va
 ## My Findings
 Based on the results from the descriptive statistics and the tests for normality and homogeneity of variance, I concluded that the data wassuitable to be tested parametrically.  As there are more than two groups using t-tests would be inappropriate so I chose to use one-way ANOVA tests to analyse the data.  The first variable I will discuss is sepal width.  The results of the ANOVA indicated that there was a significant difference between the species in regards to their sepal width as the p-value was less than 0.05.  The Tukey post-hoc test revealed that the sepal width of all three species of iris were different to each other.  
 
-		![Boxplots of Sepal Width](\project\SepalWidth.png?raw=true "Sepal Width")
+		![Boxplots of Sepal Width](https://github.com/hayleydoherty/project/blob/master/SepalWidth.png)
 		
 The next variable to look at is sepal length.  The results of the ANOVA indicated that there was a significant difference between the species in regards to their sepal length as the p-value was less than 0.05.  The Tukey post-hoc test revealed that the sepal length of all three species of iris were different to each other.  		
 
-	![Boxplots of Sepal Length](\Users\Hayle\Documents\H DIP\Programming\project\SepalLength.png?raw=true "Sepal Length")
+	![Boxplots of Sepal Length](https://github.com/hayleydoherty/project/blob/master/SepalLength.png)
 
 As with the results for sepal width and length, the results for petal width and length showed that each group was statistically different from the others.  Tukey's post-hoc tests revealed that the null hypothesis could be rejected for all of the comparisons made, meaning all groups were different to each other.
 
-	![Boxplots of Petal Width](\Users\Hayle\Documents\H DIP\Programming\project\PetalWidth.png?raw=true "Petal Width")
+	![Boxplots of Petal Width](https://github.com/hayleydoherty/project/blob/master/PetalWidth.png)
 
-	![Boxplots of Petal Length](\Users\Hayle\Documents\H DIP\Programming\project\PetalLength.png?raw=true "Petal Length")
+	![Boxplots of Petal Length](https://github.com/hayleydoherty/project/blob/master/PetalLength.png)
 
 
 My findings suggest that it is possible to classify an Iris flower as a member of one of these three species based on the measurements analysed above; sepal width and length and petal width and length.  It also appears that the setosa species is less closely related to the other two species as versicolor and virginica are to each other as the differences in variables measured appears to be bigger between the setosa group and versicolor group and the setosa group and virginica group compared to the differences between the versicolor and virginica groups.

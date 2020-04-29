@@ -10,13 +10,22 @@ pd.read_csv("irisdata.csv")
 df = pd.read_csv("irisdata.csv")
 
 setosa = df[(df['variety'] == 'Iris-setosa')]
-setosa.reset_index(inplace= True)
+#setosa.reset_index(inplace= True)
 versicolor = df[(df['variety'] == 'Iris-versicolor')]
-versicolor.reset_index(inplace= True)
+#versicolor.reset_index(inplace= True)
 virginica = df[(df['variety'] == 'Iris-virginica')]
-virginica.reset_index(inplace= True)
+#virginica.reset_index(inplace= True)
 
-sns.boxplot(x="variety", y="sepal_width", data = df)
+plt.hist(setosa["sepal_length"])
+plt.title("Sepal Length - Iris Setosa")
+plt.xlabel("Sepal length(cm)")
+plt.ylabel("No. of flowers")
+plt.savefig("setosa.png")
+plt.clf()
+
+
+
+'''sns.boxplot(x="variety", y="sepal_width", data = df)
 plt.savefig("Spairs.png")
 plt.clf()
 sns.boxplot(x="variety", y="sepal_length", data = df)
@@ -28,7 +37,7 @@ plt.clf()
 sns.boxplot(x="variety", y="petal_length", data = df)
 plt.savefig("Spas.png")
 
-'''plt.hist(df["sepal_length"][0:50])
+plt.hist(df["sepal_length"][0:50])
 plt.title("Sepal Length - Iris Setosa")
 plt.xlabel("Sepal length(cm)")
 plt.ylabel("No. of flowers")

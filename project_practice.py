@@ -8,11 +8,10 @@ pd.read_csv("irisdata.csv")
 df = pd.read_csv("irisdata.csv")
 
 setosa = df[(df['variety'] == 'Iris-setosa')]
-setosa.reset_index(inplace= True)
+
 versicolor = df[(df['variety'] == 'Iris-versicolor')]
-versicolor.reset_index(inplace= True)
+
 virginica = df[(df['variety'] == 'Iris-virginica')]
-virginica.reset_index(inplace= True)
 
 
 
@@ -29,9 +28,21 @@ print(lev3)
 lev4 = stats.levene(setosa['petal_length'], versicolor['petal_length'], virginica['petal_length'])
 print(lev4)
 
+plt.hist(df["sepal_length"][0:50])
+plt.title("Sepal Length - Iris Setosa")
+plt.xlabel("Sepal length(cm)")
+plt.ylabel("No. of flowers")
+plt.savefig("a.png")
+plt.clf()
 
+plt.hist(df["sepal_length"][50:100])
+plt.title("Sepal Length - Iris Versicolor")
+plt.xlabel("Sepal length(cm)")
+plt.ylabel("No. of flowers")
+plt.savefig("b.png")
+plt.clf()
 
-#calculating differences for use in normality test
+'''#calculating differences for use in normality test
 sw_diff1 = setosa['sepal_width'] - versicolor['sepal_width']
 sw_diff2 = setosa['sepal_width'] - virginica['sepal_width']
 sl_diff1 = setosa['sepal_length'] - versicolor['sepal_length']
@@ -61,7 +72,7 @@ print(stats.f_oneway(setosa['petal_width'], versicolor['petal_width'], virginica
 print(stats.f_oneway(setosa['petal_length'], versicolor['petal_length'], virginica['petal_length']))
 
 
-'''#with open("descriptive_stats.txt", "w") as f:
+#with open("descriptive_stats.txt", "w") as f:
     #f.write("Sepal Length\n")
     #sepl= (df["sepal_length"].groupby(df["variety"]).describe())
     #sepl.to_csv("descriptive_stats.txt")
@@ -74,10 +85,10 @@ print(stats.f_oneway(setosa['petal_length'], versicolor['petal_length'], virgini
 #pet.l= (df["petal_length"].groupby(df["variety"]).describe())
 #print()
 #print ("Petal Width") 
-#print(df["petal_width"].groupby(df["variety"]).describe())'''
+#print(df["petal_width"].groupby(df["variety"]).describe())
 
 
-'''print(stats.ttest_ind(setosa['sepal_width'], versicolor['sepal_width']))
+print(stats.ttest_ind(setosa['sepal_width'], versicolor['sepal_width']))
 print(stats.ttest_ind(setosa['sepal_width'], virginica['sepal_width']))
 
 print(stats.ttest_ind(setosa['sepal_length'], versicolor['sepal_length']))
